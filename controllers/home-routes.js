@@ -34,6 +34,10 @@ router.get('/', (req, res) => {
           posts,
           loggedIn: req.session.loggedIn
         });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
       });
   });
 
@@ -82,13 +86,15 @@ router.get('/', (req, res) => {
         // serialize the data
         const post = dbPostData.get({ plain: true });
   
-        // pass data to template
         res.render('single-post', {
           post,
           loggedIn: req.session.loggedIn
-        
         });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
       });
-    });
+  });
 
 module.exports = router;
